@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FIT-HCMUE Shop - Bring knowledge to everyone</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    <style>
+      .hh-header {
+        position: relative;
+        height: 170px;
+      }
+      .hh-logo {
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        width: 400px;
+        max-width: 48%;
+      }
+      .hh-company {
+        font-family: Impact, 'Arial Narrow', sans-serif;
+        font-size: 35px;
+        text-shadow: 0 0 2px black;
+        position: absolute;
+        top: 45px;
+        padding-bottom: 2px;
+        border-bottom: 1px dotted gray;
+        cursor: pointer;
+      }
+      .hh-slogan {
+        position: absolute;
+        top: 100px;
+      }
+      .hh-sheet {
+        box-shadow: 0 0 5px lightgray;
+        border-radius: 10px;
+        padding: 12px;
+        position: relative;
+        top: -10px;
+        margin-top: 20px;
+        background-color: #ffffff;
+      }
+      .hh-body {
+        padding: 5px;
+      }
+      .hh-cart ul {
+        padding: 0px;
+        margin: 0px;
+        list-style: none;
+        font-size: smaller;
+      }
+      .hh-cart img {
+        height: 30%;
+        width: 30%;
+        object-fit: contain;
+      }
+      .hh-card {
+        margin: 7px 0;
+      }
+      .hh-product {
+        text-align: center;
+        padding: 5px 4px;
+      }
+      .hh-product .card {
+        cursor: pointer;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+      }
+      .hh-product .card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        transform: translateY(-2px);
+      }
+      .hh-product .card-body img {
+        height: 150px;
+        max-width: 95%;
+        object-fit: contain;
+      }
+      .list-group-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+      }
+      .list-group-item.active-filter {
+        background-color: #0d6efd;
+        color: #ffffff;
+        border-color: #0d6efd;
+      }
+      .share-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #111827;
+        color: #ffffff;
+        text-decoration: none;
+        border: none;
+      }
+      .share-btn:hover {
+        background: #0d6efd;
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" style="height: auto">
+      <!-- Header -->
+      <header class="hh-header">
+        <h1 class="hh-company" onclick="goHome()">FIT-HCMUE Shop</h1>
+        <h5 class="hh-slogan">Bring knowledge to everyone</h5>
+        <img
+          class="hh-logo"
+          src="https://cdn.phototourl.com/anon/2026-11-22-ff167d09-73c7-41d6-8f11-cc4e8fdbccfd.png"
+          alt="FIT-HCMUE Shop"
+        />
+      </header>
+
+      <!-- Navbar -->
+      <nav class="row navbar navbar-expand-lg bg-light rounded border px-2">
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active fw-semibold" href="#" onclick="showView('home'); return false;">Trang chủ</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showView('about'); return false;">Giới thiệu</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="openProductDetail(PRODUCTS[0].id); return false;">Sản phẩm</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showView('contact'); return false;">Liên hệ</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showView('faq'); return false;">Hỏi đáp</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Tài khoản
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#" onclick="openAccountModal('Đăng nhập'); return false;">Đăng nhập</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="openAccountModal('Quên mật khẩu'); return false;">Quên mật khẩu</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="openAccountModal('Đăng ký thành viên'); return false;">Đăng ký thành viên</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item" href="#" onclick="openAccountModal('Cập nhật hồ sơ'); return false;">Cập nhật hồ sơ</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="openAccountModal('Đơn hàng'); return false;">Đơn hàng</a></li>
+                </ul>
+              </li>
+            </ul>
+
+            <form class="d-flex me-3" role="search" onsubmit="handleNavSearch(event)">
+              <input
+                id="navSearchInput"
+                class="form-control form-control-sm me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                oninput="syncSearch(this.value)"
+              />
+              <button class="btn btn-outline-success btn-sm" type="submit">Search</button>
+            </form>
+
+            <div class="d-flex gap-2 small">
+              <a href="#" id="langEn" class="text-decoration-none text-secondary" onclick="setLang('en'); return false;">English</a>
+              <a href="#" id="langVi" class="text-decoration-none text-dark fw-semibold" onclick="setLang('vi'); return false;">Tiếng Việt</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Sheet -->
+      <div class="hh-sheet row">
+        <!-- Left Main Content (col-sm-9) -->
+        <article class="col-sm-9">
+          <div id="mainContent" class="hh-body m-auto"></div>
+        </article>
+
+        <!-- Right Sidebar (col-sm-3) -->
+        <aside class="col-sm-3">
+          <!-- Khối giỏ hàng -->
+          <div class="card hh-cart">
+            <div class="card-header">
+              <strong>Giỏ hàng</strong>
+            </div>
+            <div class="card-body row align-items-center">
+              <div class="col-md-5 text-center">
+                <i class="fas fa-shopping-cart fa-2x text-secondary"></i>
+              </div>
+              <ul class="col-md-7">
+                <li id="sidebarCartCount">10 sp</li>
+                <li id="sidebarCartTotal">5,000,000 đ</li>
+                <li><a href="#" onclick="showView('cart'); return false;">Giỏ hàng</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Khối tìm kiếm -->
+          <div class="card hh-card">
+            <div class="card-header">
+              <i class="fab fa-apple me-1"></i>
+              <strong>Tìm kiếm</strong>
+            </div>
+            <div class="card-body">
+              <form onsubmit="handleNavSearch(event)">
+                <input
+                  id="sidebarSearchInput"
+                  placeholder="Keywords"
+                  class="form-control form-control-sm"
+                  oninput="syncSearch(this.value)"
+                />
+              </form>
+            </div>
+          </div>
+
+          <!-- Khối chủng loại -->
+          <div class="card hh-card">
+            <div class="card-header">
+              <i class="fas fa-list me-1"></i>
+              <strong>Chủng loại</strong>
+            </div>
+            <div class="list-group list-group-flush" id="categoryList"></div>
+          </div>
+
+          <!-- Khối nhà cung cấp -->
+          <div class="card hh-card">
+            <div class="card-header">
+              <i class="fas fa-building me-1"></i>
+              <strong>Nhà cung cấp</strong>
+            </div>
+            <div class="list-group list-group-flush" id="supplierList"></div>
+          </div>
+
+          <!-- Khối hàng đặc biệt -->
+          <div class="card hh-card">
+            <div class="card-header">
+              <i class="fas fa-star me-1"></i>
+              <strong>Hàng đặc biệt</strong>
+            </div>
+            <div class="list-group list-group-flush" id="specialList"></div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Footer -->
+      <footer class="row card mt-2 mb-3">
+        <div class="card-body text-center py-2">FIT-HCMUE &copy; 2023</div>
+      </footer>
+    </div>
+
+    <!-- Account Modal -->
+    <div class="modal fade" id="accountModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="accountModalTitle">Tài khoản</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form onsubmit="submitAccountModal(event)">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">Tên đăng nhập / MSSV</label>
+                <input type="text" class="form-control" required placeholder="48.01.104.051" />
+              </div>
+              <div class="mb-2">
+                <label class="form-label">Mật khẩu</label>
+                <input type="password" class="form-control" required placeholder="••••••••" />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Đóng</button>
+              <button type="submit" class="btn btn-primary btn-sm">Xác nhận</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const IPHONE_IMG = 'https://cdn.phototourl.com/anon/2026-11-22-ba9c85dc-2d1b-4966-a2ba-fcc8d3a12026.png';
+      const SAMSUNG_IMG = 'https://cdn.phototourl.com/anon/2026-11-22-5f4c3410-7adc-4990-be2e-049cd6f580ea.jpg';
+      const NOKIA_SONY_IMG = 'https://cdn.phototourl.com/anon/2026-11-22-92f298ef-a82e-4d02-8b89-fd755648a2a1.jpg';
+      const LAPTOP_IMG = 'https://cdn.phototourl.com/anon/2026-11-22-3dab3250-d1d0-4591-9e03-10eb7369aacc.jpg';
+      const TV_APPLIANCE_IMG = 'https://cdn.phototourl.com/anon/2026-11-22-9aaf4202-affe-4f7d-87e2-5fd4144345ba.jpg';
+      const FRIDGE_IMG = 'https://cdn.phototourl.com/anon/2026-11-22-6a50cb5d-7847-4e3f-8c8d-86e27512244f.jpg';
+      const IPAD_IMG = 'https://cdn.phototourl.com/anon/2026-11-22-a3e5e3c2-4826-415e-9745-91ab0e1e28e5.jpg';
+      const RICE_COOKER_IMG = 'https://cdn.phototourl.com/anon/2026-11-22-b90d7eaa-5071-4b90-99e6-128e97696d1c.jpg';
+      const AC_IMG = 'https://cdn.phototourl.com/anon/2026-11-22-0dc078b1-2427-4b89-8779-6f65be43d4ec.jpg';
+
+      const PRODUCTS = [
+        {
+          id: 'apple-iphone-14',
+          title: 'IPhone 14',
+          detailTitle: 'iPhone 14 Pro MAX - 256GB',
+          category: 'Điện thoại',
+          supplier: 'Apple',
+          priceUsd: 1019.9,
+          priceVnd: 29999000,
+          image: IPHONE_IMG,
+          special: ['Hàng bán chạy', 'Hàng mới', 'Hàng yêu thích', 'Hàng xem nhiều'],
+          specs: [
+            'Màn hình: 6.7 inches, 2796 x 1290-pixel',
+            'Hệ điều hành: iOS 16',
+            'Công nghệ màn hình: Super Retina XDR OLED',
+            'Camera chính: 48 MP, f/1.8, OIS',
+            'Camera góc siêu rộng: 12 MP, f/2.2, PDAF',
+            'Camera tele: 12 MP, f/2.8, PDAF, OIS, 3x optical zoom',
+            'Camera selfie: 12 MP, f/1.9, 23mm, 1/3.6", PDAF',
+            'RAM: 6 GB, 256 GB',
+            'Thẻ SIM: 2 SIM (nano-SIM và eSIM)',
+            'Tính năng màn hình: 120Hz, Always-On display, HDR, True Tone, Haptic Touch',
+            'Pin: 4.323 mAh',
+          ],
+        },
+        {
+          id: 'samsung-s23',
+          title: 'Galaxy S23 Ultra',
+          detailTitle: 'Samsung Galaxy S23 Ultra - 256GB',
+          category: 'Điện thoại',
+          supplier: 'Samsung',
+          priceUsd: 999.0,
+          priceVnd: 24990000,
+          image: SAMSUNG_IMG,
+          special: ['Hàng bán chạy', 'Hàng mới', 'Hàng xem nhiều'],
+          specs: [
+            'Màn hình: 6.8 inches, Dynamic AMOLED 2X 120Hz',
+            'Hệ điều hành: Android 13 (One UI 5.1)',
+            'Vi xử lý: Snapdragon 8 Gen 2 for Galaxy',
+            'Camera chính: 200 MP, f/1.7, OIS',
+            'RAM: 8 GB, 256 GB',
+            'Pin: 5.000 mAh, Sạc nhanh 45W',
+          ],
+        },
+        {
+          id: 'nokia-xr21',
+          title: 'Nokia XR21 5G',
+          detailTitle: 'Nokia XR21 5G - 128GB',
+          category: 'Điện thoại',
+          supplier: 'Nokia',
+          priceUsd: 429.0,
+          priceVnd: 10490000,
+          image: NOKIA_SONY_IMG,
+          special: ['Hàng giảm giá', 'Hàng yêu thích'],
+          specs: [
+            'Màn hình: 6.49 inches, IPS LCD 120Hz',
+            'Hệ điều hành: Android 13',
+            'Độ bền: Chuẩn quân đội MIL-STD-810H, IP69K',
+            'Camera chính: 64 MP + 8 MP',
+            'RAM: 6 GB, 128 GB',
+            'Pin: 4.800 mAh',
+          ],
+        },
+        {
+          id: 'gl-oled-tv',
+          title: 'GL Smart TV 55"',
+          detailTitle: 'GL OLED 4K Smart TV 55 inch',
+          category: 'Tivi',
+          supplier: 'GL',
+          priceUsd: 899.0,
+          priceVnd: 21990000,
+          image: TV_APPLIANCE_IMG,
+          special: ['Hàng bán chạy', 'Hàng mới'],
+          specs: [
+            'Kích thước: 55 inches, 4K Ultra HD',
+            'Công nghệ màn hình: OLED evo, 120Hz',
+            'Âm thanh: Dolby Atmos 40W',
+            'Hệ điều hành: webOS Smart TV',
+          ],
+        },
+        {
+          id: 'sony-xperia',
+          title: 'Sony Xperia 1 V',
+          detailTitle: 'Sony Ericson Xperia 1 V - 256GB',
+          category: 'Điện thoại',
+          supplier: 'Sony Ericson',
+          priceUsd: 949.0,
+          priceVnd: 23490000,
+          image: NOKIA_SONY_IMG,
+          special: ['Hàng yêu thích', 'Hàng xem nhiều'],
+          specs: [
+            'Màn hình: 6.5 inches, 4K HDR OLED 120Hz',
+            'Hệ điều hành: Android 13',
+            'Camera: Exmor T 52 MP, ống kính ZEISS',
+            'RAM: 12 GB, 256 GB',
+            'Pin: 5.000 mAh',
+          ],
+        },
+        {
+          id: 'dell-xps',
+          title: 'Dell XPS 13 Plus',
+          detailTitle: 'Dell XPS 13 Plus 9320 - i7 / 16GB',
+          category: 'Laptop',
+          supplier: 'Dell',
+          priceUsd: 1299.0,
+          priceVnd: 31990000,
+          image: LAPTOP_IMG,
+          special: ['Hàng bán chạy', 'Hàng mới', 'Hàng xem nhiều'],
+          specs: [
+            'CPU: Intel Core i7-1360P',
+            'RAM: 16 GB LPDDR5',
+            'Ổ cứng: 512 GB PCIe NVMe SSD',
+            'Màn hình: 13.4 inch 3.5K OLED Touch',
+          ],
+        },
+        {
+          id: 'acer-swift',
+          title: 'Acer Swift Go 14',
+          detailTitle: 'Acer Swift Go 14 OLED - Core Ultra 5',
+          category: 'Laptop',
+          supplier: 'Acer',
+          priceUsd: 799.0,
+          priceVnd: 18990000,
+          image: LAPTOP_IMG,
+          special: ['Hàng giảm giá', 'Hàng mới'],
+          specs: [
+            'CPU: Intel Core Ultra 5 125H',
+            'RAM: 16 GB LPDDR5X',
+            'Ổ cứng: 512 GB SSD NVMe',
+            'Màn hình: 14 inch 2.8K OLED 90Hz',
+          ],
+        },
+        {
+          id: 'hp-envy',
+          title: 'HP Envy x360 14',
+          detailTitle: 'HP Envy x360 14 - Xoay gập 360°',
+          category: 'Laptop',
+          supplier: 'HP',
+          priceUsd: 929.0,
+          priceVnd: 22490000,
+          image: LAPTOP_IMG,
+          special: ['Hàng yêu thích', 'Hàng giảm giá'],
+          specs: [
+            'CPU: Intel Core i7-1355U',
+            'RAM: 16 GB DDR4',
+            'Ổ cứng: 512 GB SSD',
+            'Màn hình: 14 inch FHD Cảm ứng xoay 360°',
+          ],
+        },
+        {
+          id: 'toshiba-ac',
+          title: 'Toshiba Inverter',
+          detailTitle: 'Điều hòa Toshiba Inverter 1.5 HP',
+          category: 'Điều hòa',
+          supplier: 'Toshiba',
+          priceUsd: 429.0,
+          priceVnd: 10290000,
+          image: AC_IMG,
+          special: ['Hàng giảm giá', 'Hàng bán chạy'],
+          specs: [
+            'Công suất: 1.5 HP - 12.000 BTU',
+            'Công nghệ: Hybrid Inverter tiết kiệm điện',
+            'Môi chất lạnh: Gas R32',
+          ],
+        },
+        {
+          id: 'apple-ipad',
+          title: 'iPad Pro M2 11"',
+          detailTitle: 'Apple iPad Pro M2 11 inch 128GB',
+          category: 'Tablet',
+          supplier: 'Apple',
+          priceUsd: 849.0,
+          priceVnd: 20990000,
+          image: IPAD_IMG,
+          special: ['Hàng mới', 'Hàng yêu thích'],
+          specs: ['Màn hình: 11 inch Liquid Retina 120Hz', 'Chip: Apple M2', 'Bộ nhớ: 128 GB'],
+        },
+        {
+          id: 'samsung-fridge',
+          title: 'Tủ lạnh Samsung',
+          detailTitle: 'Tủ lạnh Samsung Inverter 382 Lít',
+          category: 'Tủ lạnh',
+          supplier: 'Samsung',
+          priceUsd: 590.0,
+          priceVnd: 14290000,
+          image: FRIDGE_IMG,
+          special: ['Hàng giảm giá'],
+          specs: ['Dung tích: 382 Lít', 'Công nghệ: All-Around Cooling & Digital Inverter'],
+        },
+        {
+          id: 'toshiba-cooker',
+          title: 'Gia dụng Toshiba',
+          detailTitle: 'Nồi cơm điện cao tần Toshiba 1.8L',
+          category: 'Điện gia dụng',
+          supplier: 'Toshiba',
+          priceUsd: 119.0,
+          priceVnd: 2890000,
+          image: RICE_COOKER_IMG,
+          special: ['Hàng bán chạy', 'Hàng giảm giá'],
+          specs: ['Dung tích: 1.8 Lít', 'Công nghệ: Cao tần IH 1300W'],
+        },
+      ];
+
+      const CATEGORIES = [
+        { name: 'Điện thoại', badge: 55 },
+        { name: 'Laptop' },
+        { name: 'Tablet' },
+        { name: 'Điều hòa' },
+        { name: 'Tivi' },
+        { name: 'Tủ lạnh' },
+        { name: 'Điện gia dụng' },
+      ];
+      const SUPPLIERS = [
+        'Apple',
+        'Samsung',
+        'Nokia',
+        'GL',
+        'Sony Ericson',
+        'Dell',
+        'Acer',
+        'HP',
+        'Toshiba',
+      ];
+      const SPECIALS = [
+        'Hàng bán chạy',
+        'Hàng mới',
+        'Hàng giảm giá',
+        'Hàng yêu thích',
+        'Hàng xem nhiều',
+      ];
+
+      const TEAM_MEMBERS = [
+        { name: 'Nguyễn Minh Khang', mssv: '48.01.104.051', role: 'Nhóm trưởng · Layout & Trang chủ' },
+        { name: 'Trần Ngọc Thảo Vy', mssv: '48.01.104.089', role: 'Trang chi tiết sản phẩm & Giỏ hàng' },
+        { name: 'Lê Hoàng Gia Bảo', mssv: '48.01.104.012', role: 'Sidebar, Bộ lọc & Trang Giới thiệu' },
+      ];
+
+      let state = {
+        view: 'home',
+        productId: PRODUCTS[0].id,
+        search: '',
+        category: null,
+        supplier: null,
+        special: null,
+        cart: [{ id: 'seed', title: 'Phụ kiện Apple FIT-HCMUE', priceVnd: 500000, qty: 10 }],
+      };
+
+      function formatVnd(n) {
+        return n.toLocaleString('en-US') + ' đ';
+      }
+
+      function renderSidebarLists() {
+        document.getElementById('categoryList').innerHTML = CATEGORIES.map(
+          (c) => `
+          <a href="#" class="list-group-item list-group-item-action ${state.category === c.name ? 'active-filter' : ''}"
+             onclick="toggleFilter('category', '${c.name}'); return false;">
+            <span>${c.name}</span>
+            ${c.badge ? `<span class="badge bg-primary rounded-pill">${c.badge}</span>` : ''}
+          </a>`
+        ).join('');
+
+        document.getElementById('supplierList').innerHTML = SUPPLIERS.map(
+          (s) => `
+          <a href="#" class="list-group-item list-group-item-action ${state.supplier === s ? 'active-filter' : ''}"
+             onclick="toggleFilter('supplier', '${s}'); return false;">
+            ${s}
+          </a>`
+        ).join('');
+
+        document.getElementById('specialList').innerHTML = SPECIALS.map(
+          (sp) => `
+          <a href="#" class="list-group-item list-group-item-action ${state.special === sp ? 'active-filter' : ''}"
+             onclick="toggleFilter('special', '${sp}'); return false;">
+            ${sp}
+          </a>`
+        ).join('');
+
+        const totalQty = state.cart.reduce((s, i) => s + i.qty, 0);
+        const totalVnd = state.cart.reduce((s, i) => s + i.qty * i.priceVnd, 0);
+        document.getElementById('sidebarCartCount').textContent = `${totalQty} sp`;
+        document.getElementById('sidebarCartTotal').textContent = formatVnd(totalVnd);
+      }
+
+      function toggleFilter(type, value) {
+        state[type] = state[type] === value ? null : value;
+        state.view = 'home';
+        render();
+      }
+
+      function syncSearch(val) {
+        state.search = val;
+        document.getElementById('navSearchInput').value = val;
+        document.getElementById('sidebarSearchInput').value = val;
+        state.view = 'home';
+        render();
+      }
+
+      function handleNavSearch(e) {
+        e.preventDefault();
+        state.view = 'home';
+        render();
+      }
+
+      function goHome() {
+        state.search = '';
+        state.category = null;
+        state.supplier = null;
+        state.special = null;
+        document.getElementById('navSearchInput').value = '';
+        document.getElementById('sidebarSearchInput').value = '';
+        state.view = 'home';
+        render();
+      }
+
+      function showView(view) {
+        state.view = view;
+        render();
+      }
+
+      function openProductDetail(id) {
+        state.productId = id;
+        state.view = 'detail';
+        render();
+      }
+
+      function addToCart(id) {
+        const prod = PRODUCTS.find((p) => p.id === id);
+        const qtyInput = document.getElementById('detailQty');
+        const qty = Math.max(1, parseInt(qtyInput ? qtyInput.value : '1', 10) || 1);
+        const existing = state.cart.find((c) => c.id === id);
+        if (existing) existing.qty += qty;
+        else state.cart.push({ id: prod.id, title: prod.detailTitle, priceVnd: prod.priceVnd, qty });
+        renderSidebarLists();
+        showDetailNotice('Đã thêm sản phẩm vào giỏ hàng!');
+      }
+
+      function renderHome() {
+        const q = state.search.trim().toLowerCase();
+        const filtered = PRODUCTS.filter((p) => {
+          if (q && !p.title.toLowerCase().includes(q) && !p.supplier.toLowerCase().includes(q) && !p.category.toLowerCase().includes(q)) return false;
+          if (state.category && p.category !== state.category) return false;
+          if (state.supplier && p.supplier !== state.supplier) return false;
+          if (state.special && !p.special.includes(state.special)) return false;
+          return true;
+        });
+
+        const filterLabels = [q && `"${q}"`, state.category, state.supplier, state.special].filter(Boolean);
+        const filterBar = filterLabels.length
+          ? `<div class="alert alert-light border d-flex justify-content-between align-items-center py-2 px-3 mb-2 small">
+               <span>Đang lọc theo: <strong>${filterLabels.join(' · ')}</strong> (${filtered.length})</span>
+               <a href="#" onclick="goHome(); return false;">Hiển thị tất cả</a>
+             </div>`
+          : '';
+
+        if (!filtered.length) {
+          return `${filterBar}<div class="p-4 text-center border rounded bg-light">Không có sản phẩm phù hợp.</div>`;
+        }
+
+        return `
+          ${filterBar}
+          <div class="row g-2">
+            ${filtered
+              .map(
+                (p) => `
+              <div class="col-md-4 col-sm-6 hh-product">
+                <div class="card h-100" onclick="openProductDetail('${p.id}')">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0 text-truncate">${p.title}</h5>
+                  </div>
+                  <div class="card-body d-flex align-items-center justify-content-center">
+                    <img src="${p.image}" alt="${p.title}" />
+                  </div>
+                  <div class="card-footer d-flex justify-content-between align-items-center small">
+                    <span class="text-muted">${p.supplier}</span>
+                    <span class="fw-semibold">$ ${p.priceUsd}</span>
+                  </div>
+                </div>
+              </div>`
+              )
+              .join('')}
+          </div>`;
+      }
+
+      function renderDetail() {
+        const p = PRODUCTS.find((item) => item.id === state.productId) || PRODUCTS[0];
+        return `
+          <div class="mb-3">
+            <a href="#" class="text-decoration-none small" onclick="showView('home'); return false;">&larr; Quay lại danh sách sản phẩm</a>
+          </div>
+          <div class="row g-4 align-items-start">
+            <div class="col-md-5 text-center">
+              <img src="${p.image}" alt="${p.detailTitle}" class="img-fluid" style="max-height: 360px; object-fit: contain;" />
+            </div>
+            <div class="col-md-7">
+              <div class="text-muted small">${p.category} · ${p.supplier}</div>
+              <h3 class="border-bottom pb-2 mb-2">${p.detailTitle}</h3>
+              <h4 class="fw-bold mb-3">${formatVnd(p.priceVnd)}</h4>
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <input id="detailQty" type="number" min="1" value="1" class="form-control form-control-sm" style="width: 70px;" />
+                <button class="btn btn-primary btn-sm" onclick="addToCart('${p.id}')">Thêm vào giỏ</button>
+                <button class="btn btn-primary btn-sm" onclick="showDetailNotice('Đã thêm vào danh sách yêu thích!')">Yêu thích</button>
+              </div>
+              <div id="addFeedback" class="alert alert-success py-1 px-2 small d-none">Đã thêm sản phẩm vào giỏ hàng!</div>
+              <h6 class="fw-bold border-top pt-2">Thông tin sản phẩm</h6>
+              <ul class="list-unstyled small lh-lg mb-3">
+                ${p.specs.map((s) => `<li>${s}</li>`).join('')}
+              </ul>
+              <div class="border-top pt-2">
+                <div class="fw-bold small mb-2">Chia sẻ sản phẩm:</div>
+                <div class="d-flex gap-2">
+                  <button class="share-btn" onclick="showDetailNotice('Đã sao chép liên kết chia sẻ Facebook!')"><i class="fab fa-facebook-f"></i></button>
+                  <button class="share-btn" onclick="showDetailNotice('Đã sao chép liên kết chia sẻ Twitter!')"><i class="fab fa-twitter"></i></button>
+                  <button class="share-btn" onclick="showDetailNotice('Đã sao chép liên kết chia sẻ Instagram!')"><i class="fab fa-instagram"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>`;
+      }
+
+      function renderAbout() {
+        return `
+          <div class="card">
+            <div class="card-header fw-bold">Giới thiệu thành viên nhóm</div>
+            <div class="card-body">
+              <p class="small text-muted">Bài tập Thiết kế Layout với Bootstrap 5 - Website FIT-HCMUE Shop.</p>
+              <table class="table table-bordered table-hover small mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th>STT</th>
+                    <th>Họ và tên</th>
+                    <th>Mã số sinh viên</th>
+                    <th>Phân công</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${TEAM_MEMBERS.map(
+                    (m, idx) => `
+                    <tr>
+                      <td>${idx + 1}</td>
+                      <td class="fw-semibold">${m.name}</td>
+                      <td>${m.mssv}</td>
+                      <td>${m.role}</td>
+                    </tr>`
+                  ).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>`;
+      }
+
+      function renderCart() {
+        const total = state.cart.reduce((s, i) => s + i.qty * i.priceVnd, 0);
+        return `
+          <div class="card">
+            <div class="card-header fw-bold d-flex justify-content-between">
+              <span>Giỏ hàng</span>
+              <a href="#" class="small fw-normal" onclick="showView('home'); return false;">Tiếp tục mua hàng</a>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm align-middle small">
+                <thead>
+                  <tr><th>Sản phẩm</th><th>Đơn giá</th><th>Số lượng</th><th>Thành tiền</th></tr>
+                </thead>
+                <tbody>
+                  ${state.cart
+                    .map(
+                      (item) => `
+                    <tr>
+                      <td>${item.title}</td>
+                      <td>${formatVnd(item.priceVnd)}</td>
+                      <td>${item.qty}</td>
+                      <td class="fw-semibold">${formatVnd(item.qty * item.priceVnd)}</td>
+                    </tr>`
+                    )
+                    .join('')}
+                </tbody>
+              </table>
+              <div class="text-end fw-bold fs-6">Tổng cộng: <span class="text-danger">${formatVnd(total)}</span></div>
+            </div>
+          </div>`;
+      }
+
+      function renderContact() {
+        return `
+          <div class="card">
+            <div class="card-header fw-bold">Liên hệ FIT-HCMUE Shop</div>
+            <div class="card-body small">
+              <p><strong>Địa chỉ:</strong> 280 An Dương Vương, Phường 4, Quận 5, TP. Hồ Chí Minh</p>
+              <p><strong>Điện thoại:</strong> (028) 3835 2020</p>
+              <p><strong>Email:</strong> shop@fit.hcmue.edu.vn</p>
+            </div>
+          </div>`;
+      }
+
+      function renderFaq() {
+        return `
+          <div class="card">
+            <div class="card-header fw-bold">Hỏi đáp thường gặp</div>
+            <div class="card-body small">
+              <p><strong>1. Làm sao để đặt hàng?</strong><br/>Chọn sản phẩm muốn mua, vào trang chi tiết và nhấn "Thêm vào giỏ".</p>
+              <p class="mb-0"><strong>2. Chế độ bảo hành?</strong><br/>Tất cả sản phẩm chính hãng bảo hành 12 tháng.</p>
+            </div>
+          </div>`;
+      }
+
+      function showDetailNotice(msg) {
+        const fb = document.getElementById('addFeedback');
+        if (fb) {
+          fb.textContent = msg;
+          fb.classList.remove('d-none');
+          setTimeout(() => fb.classList.add('d-none'), 1800);
+        }
+      }
+
+      function setLang(lang) {
+        document.getElementById('langEn').className =
+          lang === 'en' ? 'text-decoration-none text-dark fw-semibold' : 'text-decoration-none text-secondary';
+        document.getElementById('langVi').className =
+          lang === 'vi' ? 'text-decoration-none text-dark fw-semibold' : 'text-decoration-none text-secondary';
+        render();
+      }
+
+      function openAccountModal(title) {
+        document.getElementById('accountModalTitle').textContent = title;
+        const modal = new bootstrap.Modal(document.getElementById('accountModal'));
+        modal.show();
+      }
+
+      function submitAccountModal(e) {
+        e.preventDefault();
+        bootstrap.Modal.getInstance(document.getElementById('accountModal')).hide();
+      }
+
+      function render() {
+        renderSidebarLists();
+        const container = document.getElementById('mainContent');
+        if (state.view === 'home') container.innerHTML = renderHome();
+        else if (state.view === 'detail') container.innerHTML = renderDetail();
+        else if (state.view === 'about') container.innerHTML = renderAbout();
+        else if (state.view === 'cart') container.innerHTML = renderCart();
+        else if (state.view === 'contact') container.innerHTML = renderContact();
+        else if (state.view === 'faq') container.innerHTML = renderFaq();
+      }
+
+      render();
+    </script>
+  </body>
+</html>
